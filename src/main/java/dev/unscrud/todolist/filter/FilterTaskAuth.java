@@ -1,6 +1,7 @@
 package dev.unscrud.todolist.filter;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,10 +19,10 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         var authorization = request.getHeader("Authorization");
+        var authEncoded = authorization.substring("Basic".length()).trim();
+        byte[] authDecode = Base64.getDecoder().decode(authEncoded);
         System.out.println("Autorizacao: ");
-        System.out.println(authorization);
-        var user_password = authorization.substring("Basic".length()).trim();
-        System.out.println(user_password);
+        System.out.println(authDecode);
 
         filterChain.doFilter(request, response);
     }
