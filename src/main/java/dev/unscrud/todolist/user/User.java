@@ -1,6 +1,7 @@
 package dev.unscrud.todolist.user;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private UUID uuid;
 
     @Column(unique = true)
     private String username;
