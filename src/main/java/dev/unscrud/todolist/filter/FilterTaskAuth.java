@@ -16,6 +16,13 @@ public class FilterTaskAuth extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        
+        var authorization = request.getHeader("Authorization");
+        System.out.println("Autorizacao: ");
+        System.out.println(authorization);
+        var user_password = authorization.substring("Basic".length()).trim();
+        System.out.println(user_password);
+
         filterChain.doFilter(request, response);
     }
 
