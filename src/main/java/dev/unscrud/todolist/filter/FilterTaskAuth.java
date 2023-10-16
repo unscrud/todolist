@@ -24,13 +24,13 @@ public class FilterTaskAuth extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
-        var authorization = request.getHeader("Authorization");
-        var authEncoded = authorization.substring("Basic".length()).trim();
+        String authorization = request.getHeader("Authorization");
+        String authEncoded = authorization.substring("Basic".length()).trim();
         byte[] authDecode = Base64.getDecoder().decode(authEncoded);
-        var authString = new String(authDecode);
+        String authString = new String(authDecode);
         String[] credentials = authString.split(":");
-        var username = credentials[0];
-        var password = credentials[1];
+        String username = credentials[0];
+        String password = credentials[1];
         
         var user = this.userRepository.findByUsername(username);
 
