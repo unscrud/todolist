@@ -38,14 +38,14 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             var user = this.userRepository.findByUsername(username);
     
             if (user == null){
-                response.sendError(401);
+                response.sendError(401, "Usuário não encontrado");
             } else{
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
                 if(passwordVerify.verified) {
                     request.setAttribute("idUser", user.getUuid());    
                     filterChain.doFilter(request, response);
                 } else {
-                    response.sendError(401);
+                    response.sendError(401,"Senha incorreta");
                 }
             }            
         } else {
