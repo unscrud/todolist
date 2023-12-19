@@ -25,6 +25,16 @@ public class TaskController {
         var idUser = request.getAttribute("idUser");
         task.setIdUser((UUID) idUser);
 
+        var currentDate = LocalDateTime.now();
+
+        if(currentDate.isAfter(task.getStartAt())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de início deve ser maior que a data atual");
+        }
+
+        if(currentDate.isAfter(task.getEndAt())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de término deve ser maior que a data atual");
+        }
+
         //this.taskRepository.save(task);
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
