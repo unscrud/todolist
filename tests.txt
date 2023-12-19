@@ -11,3 +11,6 @@ http -a fulano:fulano POST localhost:8080/tasks description="tarefa fake de test
 
 - listar as tarefas de um usuário
 http -a fulano:fulano localhost:8080/tasks
+
+- alterar a descrição de uma tarefa
+http -a fulano:fulano PUT localhost:8080/tasks/fde593ea-0790-479d-ac1b-a91ab6493d62 description="teste de alteração"
