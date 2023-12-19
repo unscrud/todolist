@@ -8,3 +8,6 @@ http POST localhost:8080/tasks description="tarefa fake de teste realizado para 
 
 - Criação de tarefa com autenticação
 http -a fulano:fulano POST localhost:8080/tasks description="tarefa fake de teste realizado para teste de teste" title="TASK TEST" priority="ALTA" startAt="2023-10-29T10:10:10" endAt="2023-10-30T10:10:10" idUser="0aa8d1aa-e108-428b-aefc-d30ee85738bc"
+
+- listar as tarefas de um usuário
+http -a fulano:fulano localhost:8080/tasks

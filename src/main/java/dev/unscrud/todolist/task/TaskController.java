@@ -1,6 +1,7 @@
 package dev.unscrud.todolist.task;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/tasks")
@@ -42,4 +46,11 @@ public class TaskController {
         var taskCreated = this.taskRepository.save(task);
         return ResponseEntity.status(HttpStatus.OK).body(taskCreated);
     }
+
+    @GetMapping
+    public List<Task> list(HttpServletRequest request) {
+        var idUser = request.getAttribute("idUser");
+        return this.taskRepository.findByIdUser((UUID) idUser);
+    }
+    
 }
